@@ -8,7 +8,7 @@ $error_satuan = '';
 $error_hargasatuan = '';
 $error_keterangan = '';
 
-//connect database
+//connect databasegtt
 require_once('config.php');
 $db = new mysqli($db_host, $db_username, $db_password, $db_database);
 if ($db->connect_errno){
