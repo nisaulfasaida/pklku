@@ -1,3 +1,32 @@
+<?php
+    $id=$_SESSION['masuk'];
+    require_once('config.php');
+              $db = new mysqli($db_host, $db_username, $db_password, $db_database);
+              if ($db->connect_errno){
+                die ("Could not connect to the database: <br />". $db->connect_error);
+              }
+
+    if($status=='admin'){
+      $pesanWelcome='"Selamat Datang Admin"';
+      $query1="SELECT count(no_admin) as counter FROM admin";
+  }
+
+  $result1 = $con->query($query1);
+  // $result1 = $con->query($query_pkt_lab);
+  $row=$result1->fetch_object();
+  $jml_admin=$row->counter;
+  //
+  $query="SELECT count(kode_perusahaan) as counter FROM perusahaan";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_perusahaan=$row->counter;
+  //
+  $query="SELECT count(no_proyek) as counter FROM proyek";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_proyek=$row->counter;
+  // $query="SELECT count(idtransaksi) as counter FROM detail_transaksi WHERE tgl_kembali='0000-00-00'";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,11 +47,6 @@
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
-    <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <!-- easy pie chart-->
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <!-- owl carousel -->
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
 	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
@@ -33,14 +57,7 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/xcharts.min.css" rel=" stylesheet">	
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-    <!-- =======================================================
-        Theme Name: NiceAdmin
-        Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-        Author: BootstrapMade
-        Author URL: https://bootstrapmade.com
-    ======================================================= -->
   </head>
-
   <body>
   <!-- container section start -->
   <section id="container" class="">
@@ -57,60 +74,31 @@
 			  <div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Home</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="fa fa-laptop"></i>Home</li>						  	
-					</ol>
+
+          <h5>Selamat datang <b><?php if($status=="admin") echo $admin->nama?></b>. <small><i><?php echo $pesanWelcome ?></i></small></h5>
 				</div>
 			</div>
              
             <div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
-						<i class="fa fa-cloud-download"></i>
-						<div class="count">6.674</div>
-						<div class="title">Download</div>						
+						<i class="fa fa-building-o"></i>
+						<div class="main-text"><?php echo $jml_perusahaan ?></div>
+            <div class="text-muted">Perusahaan</div>						
 					</div><!--/.info-box-->			
 				</div><!--/.col-->
 				
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box brown-bg">
-						<i class="fa fa-shopping-cart"></i>
-						<div class="count">7.538</div>
-						<div class="title">Purchased</div>						
+						<i class="fa fa-tasks"></i>
+						<div class="main-text"><?php echo $jml_proyek ?></div>
+            <div class="text-muted">Proyek</div>					
 					</div><!--/.info-box-->			
 				</div><!--/.col-->	
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-thumbs-o-up"></i>
-						<div class="count">4.362</div>
-						<div class="title">Order</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-						<i class="fa fa-cubes"></i>
-						<div class="count">1.426</div>
-						<div class="title">Stock</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
 				
 			</div><!--/.row-->
 
           </section>
-          <div class="text-right">
-          <div class="credits">
-                <!-- 
-                    All the links in the footer should remain intact. 
-                    You can delete the links only if you purchased the pro version.
-                    Licensing information: https://bootstrapmade.com/license/
-                    Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-                -->
-                <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
       </section>
       <!--main content end-->
   </section>
@@ -131,9 +119,6 @@
     <script src="js/jquery.sparkline.js" type="text/javascript"></script>
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
-    <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>
 	<script src="js/jquery.rateit.min.js"></script>
