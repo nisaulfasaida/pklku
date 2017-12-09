@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+} ?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -61,7 +66,7 @@
 		    <div class="row">
                   <div class="col-lg-12">
                       <a class="btn btn-info" href="form_analisis.php" title="Bootstrap 3 themes generator">Tambah Analisis Pekerjaan</a>
-					  <a class="btn btn-success" href="pdf_tenaga.php" title="Bootstrap 3 themes generator">Cetak Tabel (Pdf)</a>
+					  <a class="btn btn-success" href="pdf_tenaga.php" title="Bootstrap 3 themes generator">Cetafk Tabel (Pdf)</a>
 					  <br></br>
 					  <section class="panel">
                           <header class="panel-heading">

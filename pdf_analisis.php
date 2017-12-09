@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
 
   $no_analisis = $_GET['id'];
   $no_proyek = $_GET['idp'];
@@ -106,7 +111,7 @@
 		</div>
 	</div>
     <!-- Table row -->
-    <div class="row">
+    <div class="row" style="margin-top: -100px">
 		<div class="col-xs-12 table-responsive">
         <table class="table table-bordered">
           <thead>

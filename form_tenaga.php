@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
 	require_once('config.php');
 	$db = new mysqli($db_host, $db_username, $db_password, $db_database);
 	if($db->connect_errno){
@@ -86,12 +92,7 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-files-o"></i> Form Bahan Baku</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="icon_document_alt"></i>Forms</li>
-						<li><i class="fa fa-files-o"></i>Form Tenaga Kerja</li>
-					</ol>
+					<h3 class="page-header"><i class="fa fa-files-o"></i> Form Tenaga Kerja</h3>
 				</div>
 			</div>
               <!-- Form validations -->              
@@ -103,7 +104,7 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-								<form method='POST' autocomplete='on' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+								<form method='POST' autocomplete='on' action="">
 									<div class="form-group">
                                       <label class="col-sm-2 control-label">Deskripsi</label>
                                       <div class="col-sm-10">
@@ -125,7 +126,7 @@
 									<div class="form-group">
                                       <label class="col-sm-2 control-label">Harga Satuan</label>
                                       <div class="col-sm-10">
-                                          <input name='harga_satuan' type="text" pattern="(\d{2})([\.])(\d{2})" class="form-control" required//>
+                                          <input name='harga_satuan' type="number"  class="form-control" required//>
                                       </div>
 									</div>
 									<div class="form-group">

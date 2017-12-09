@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+	 header('Location:./login.php');
+}
 		$id = $_GET['id'];
 		$ids = $_GET['ids'];
 		$idp = $_GET['idp'];

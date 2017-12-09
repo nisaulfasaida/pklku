@@ -1,0 +1,86 @@
+body{
+	background: #ECF0F1;
+	font-family: sans-serif;
+}
+
+#kotak{
+	width: 370px;
+	height: 350px;
+	background: #fff;
+	margin: 180px auto 0;
+	color: #4A266A;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	border: 2px solid #4A266A;
+}
+.judulapk {
+	width: 500px;
+	height: 90px;
+	max-width: 354px;
+	border-radius: 5px 5px 0px 0px;
+	padding: 0.5px 7px 7px 10px;
+	background-color: #4A266A;
+	color: white;
+	text-align: center;
+	font-size: 14pt;
+}
+.masukusername{
+	width: 300px;
+	height: 40px;	
+	margin-top:40px;
+	margin-left: 10px;
+	font-size: 12pt;
+	border: 1px solid #4A266A;
+	padding-left: 10px;
+	color: #4A266A;;
+}
+.masukusername:focus{
+	width: 300px;
+	height: 40px;
+	margin-top: 40px;
+	margin-left: 10px;
+	font-size: 12pt;
+	padding-left: 10px;
+	color: #4A266A;
+	outline: none;
+	box-shadow: 0 0 5px #4A266A;
+}
+.content i{
+	color : #4A266A;	
+	margin-top: 10px;
+	margin-left: -10px;
+}
+.masuk{
+	width: 300px;
+	height: 40px;
+	margin-top:10px;
+	margin-left: 10px;
+	font-size: 12pt;
+	border: 1px solid #4A266A;
+	padding-left: 10px;
+	color: #4A266A;
+}
+.masuk:focus{
+	width: 300px;
+	height: 40px;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 12pt;
+	padding-left: 10px;
+	color: #4A266A;
+	outline: none;
+	box-shadow: 0 0 5px #4A266A;
+}
+
+.tombol{
+	width: 312px;
+	height:40px;
+	margin-top: 25px;
+	margin-left: 0px;	
+	background: #4A266A;
+	border: none;
+	color: #fff;
+	font-size: 14pt;
+	outline: none;
+	cursor: pointer;
+}

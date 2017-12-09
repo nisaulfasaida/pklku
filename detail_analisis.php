@@ -1,4 +1,10 @@
 <?php 
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
   $no_analisis = $_GET['id'];
   $no_proyek = $_GET['idp'];
                   require_once('config.php');
@@ -81,7 +87,7 @@
                                        <a href="form_alat_berat.php?id=<?php echo $no_analisis ?>&idp=<?php echo $no_proyek ?>">Tambah Analisis Alat Berat</a> 
                                    </li>
                                    <li>
-                                       <a href="pdf_analisis.php?id=<?php echo $no_analisis ?>&idp=<?php echo $no_proyek ?>"><i class="fa fa-print" target="_blank"></i>Cetak Standart Analisis</a> 
+                                       <a target='_blank' href="pdf_analisis.php?id=<?php echo $no_analisis ?>&idp=<?php echo $no_proyek ?>"><i class="fa fa-print" target="_blank"></i>Cetak Standart Analisis</a> 
                                    </li>  
                                </ul> 
                           </header> 
@@ -91,7 +97,7 @@
                 <header class="panel-heading" align="center">
                               FORMULIR STANDAR UNTUK<br>
 							  PEREKAMAN ANALISA MASING-MASING HARGA SATUAN 
-                <?php  echo $no_analisis ?>
+                
                 </header>
       						<?php                           
       						
@@ -114,7 +120,7 @@
       						}
                   //==================================tabel===============================
                   echo'
-                <table class="table table-condensed">';
+                <table class="table table-hover table-striped table-bordered">';
       						echo '<tbody>';		
                        echo'<tr>';
                        echo'<th rowspan="2">NO.</th>';
@@ -158,9 +164,9 @@
                       echo '<td>'.$no.'</td> ';
                       echo '<td>'.$row->nama_tenaga.'</td> ';
                       echo '<td>'.$row->satuan.'</td>';
-                      echo '<td>'.$row->perkiraan.'</td>';
-                      echo '<td>'.$row->harga_satuan.'</td>';
-                      echo '<td>'.$row->harga_satuan*$row->perkiraan.'</td>';
+                      echo '<td align="right">'.number_format($row->perkiraan,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_satuan,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_satuan*$row->perkiraan,2,",",".").'</td>';
                       echo '<td colspan="2">
                       <a class="btn btn-warning" href="edit_analisis_tenaga.php?id='.$row->no_analisis_tenaga.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'" ><i class="fa fa-pencil"></i> Edit</a>
                       <a class="btn btn-danger" href="del_analisis_tenaga.php?id='.$row->no_analisis_tenaga.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'"><i class="icon_close_alt2"></i> Hapus</a></td>';
@@ -195,9 +201,9 @@
                       echo '<td>'.$no.'</td> ';
                       echo '<td>'.$row->nama_barang.'</td> ';
                       echo '<td>'.$row->satuan.'</td>';
-                      echo '<td>'.$row->perkiraan.'</td>';
-                      echo '<td>'.$row->harga_k.'</td>';
-                      echo '<td>'.$row->harga_k*$row->perkiraan.'</td>';
+                      echo '<td align="right">'.number_format($row->perkiraan,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_k,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_k*$row->perkiraan,2,",",".").'</td>';
                       echo '<td colspan="3">
                       <a class="btn btn-warning" href="edit_analisis_bahan.php?id='.$row->no_analisis_bahan.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'" ><i class="fa fa-pencil"></i> Edit</a>
                       <a class="btn btn-danger" href="del_analisis_bahan.php?id='.$row->no_analisis_bahan.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'"><i class="icon_close_alt2"></i> Hapus</a></td>';
@@ -227,9 +233,9 @@
                       echo '<td>'.$no.'</td> ';
                       echo '<td>'.$row->nama_alat_berat.'</td> ';
                       echo '<td>-</td>';
-                      echo '<td>'.$row->unit.'</td>';
-                      echo '<td>'.$row->harga_satuan.'</td>';
-                      echo '<td>'.$row->harga_satuan*$row->unit.'</td>';
+                      echo '<td align="right">'.number_format($row->unit,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_satuan,2,",",".").'</td>';
+                      echo '<td align="right">'.number_format($row->harga_satuan*$row->unit,2,",",".").'</td>';
                       echo '<td colspan="2">
                       <a class="btn btn-warning" href="edit_alat_berat.php?id='.$row->no_alat_berat.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'" ><i class="fa fa-pencil"></i> Edit</a>
                       <a class="btn btn-danger" href="del_alat_berat.php?id='.$row->no_alat_berat.'&ids='.$row->no_analisis.'&idp='.$row->no_proyek.'"><i class="icon_close_alt2"></i> Hapus</a></td>';
@@ -241,16 +247,16 @@
                   $pajak = $total/10;
                   $hargapsar = $total-$pajak;
                   echo'<tr>';
-                      echo'<th colspan="5">D. Jumlah Perekaman Analisis Harga           (A+B+C)</tH>';
-                      echo'<th>'.$total.'</th>';
+                      echo'<td colspan="5">D. Jumlah Perekaman Analisis Harga           (A+B+C)</td>';
+                      echo'<td align="right">'.number_format($total,2,",",".").'</td>';
                   echo'</tr>';
                   echo'<tr>';
-                      echo'<th colspan="5">E. Pajak 10%                                 (D x 10%)</tH>';
-                      echo'<th>'.$pajak.'</th>';
+                      echo'<td colspan="5">E. Pajak 10%                                 (D x 10%)</td>';
+                      echo'<td align="right">'.number_format($pajak,2,",",".").'</td>';
                   echo'</tr>';
                   echo'<tr>';
-                      echo'<th colspan="5">F. Harga Pemasaran                            (D-F)</tH>';
-                      echo'<th>'.$hargapsar.'</th>';
+                      echo'<td colspan="5">F. Harga Pemasaran                            (D-F)</td>';
+                      echo'<td align="right">'.number_format($hargapsar,2,",",".").'</td>';
                   echo'</tr>';
                   $result->free();
       						$result2->free();

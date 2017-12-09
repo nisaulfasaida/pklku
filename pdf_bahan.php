@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+	 header('Location:./login.php');
+}
 //koneksi ke database
 $db_host='localhost';
 $db_database='pklbbm';

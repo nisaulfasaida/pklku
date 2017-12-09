@@ -1,4 +1,3 @@
-<?php include("functions.php"); ?>
 <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->

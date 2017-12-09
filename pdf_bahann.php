@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+	 header('Location:./login.php');
+}
 		require_once('config.php');
 		$con = new mysqli($db_host, $db_username, $db_password, $db_database);
 		if (mysqli_connect_errno()){
@@ -99,8 +104,8 @@
 							echo '<td>'.$row['kode_barang'].'</td> ';
 							echo '<td>'.$row['nama_barang'].'</td>';	
 							echo '<td>'.$row['satuan'].'</td>';
-							echo '<td>'.$row['harga_k'].'</td>';
-							echo '<td>'.$row['harga_ahs'].'</td>';	
+							echo '<td align="right">'.number_format($row['harga_k'],2,",",".").'</td>';
+							echo '<td align="right">'.number_format($row['harga_ahs'],2,",",".").'</td>';	
 						echo '</tr>';
 						$no++;
 					}

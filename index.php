@@ -1,20 +1,25 @@
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+	 header('Location:./login.php');
+}
     include("header.php");
-    include("sidebar.php");
+   include("sidebar.php");
     // include("functions.php");
 
     // $id=$_SESSION['masuk'];
 
-    // require_once('config.php');
+  require_once('config.php');
+	$con = mysqli_connect($db_host, $db_username, $db_password, $db_database);
     $db = new mysqli($db_host, $db_username, $db_password, $db_database);
     if ($db->connect_errno){
         die ("Could not connect to the database: <br />". $db->connect_error);
     }
 
-    if($status=='admin'){
-      $pesanWelcome='"Selamat Datang Admin"';
+      $pesanWelcome='"Selamat Datang "';
       $query1="SELECT count(no_admin) as counter FROM admin";
-  }
+  
 
   $result1 = $con->query($query1);
   // $result1 = $con->query($query_pkt_lab);
@@ -30,7 +35,28 @@
   $result = $con->query($query);
   $row=$result->fetch_object();
   $jml_proyek=$row->counter;
-  // $query="SELECT count(idtransaksi) as counter FROM detail_transaksi WHERE tgl_kembali='0000-00-00'";
+  //
+  $query="SELECT count(kode_kerja) as counter FROM pekerjaan";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_kerja=$row->counter;
+  //
+  $query="SELECT count(no_analisis) as counter FROM analisis_pekerjaan";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_ana=$row->counter;
+  //
+  $query="SELECT count(kode_tenaga) as counter FROM tenaga_kerja";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_tenaga=$row->counter;
+  //
+  $query="SELECT count(kode_barang) as counter FROM bahan_baku";
+  $result = $con->query($query);
+  $row=$result->fetch_object();
+  $jml_bahan=$row->counter;
+  //
+  //
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,40 +92,64 @@
   <body>
   <!-- container section start -->
   <section id="container" class="">
-
-       <?php
-
-	  ?>
-
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
               <!--overview start-->
 			  <div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Home</h3>
-
-          <h5>Selamat datang <b><?php if($status=="admin") echo $admin->nama?></b>. <small><i><?php echo $pesanWelcome ?></i></small></h5>
+        <div class="col-lg-12">
+					<h4 class="page-header" align="center"><b>Aplikasi Perhitungan Rencana Biaya Proyek<br>PT Beton Budi Mulya</b></h4>
 				</div>
 			</div>
 
-            <div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box blue-bg">
-						<i class="fa fa-building-o"></i>
-						<div class="main-text"><?php echo $jml_perusahaan ?></div>
-            <div class="text-muted">Perusahaan</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
+        <div class="row" align="center">
+  				<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+  					<div class="info-box blue-bg">
+  						<i class="fa fa-building-o"></i>
+  						<div class="count"><?php echo $jml_perusahaan ?></div>
+              <div class="title">Perusahaan</div>
+  					</div><!--/.info-box-->
+  				</div><!--/.col-->
 
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box brown-bg">
-						<i class="fa fa-tasks"></i>
-						<div class="main-text"><?php echo $jml_proyek ?></div>
-            <div class="text-muted">Proyek</div>
-					</div><!--/.info-box-->
-				</div><!--/.col-->
+  				<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+  					<div class="info-box brown-bg">
+  						<i class="fa fa-tasks"></i>
+  						<div class="count"><?php echo $jml_proyek ?></div>
+              <div class="title">Proyek</div>
+  					</div><!--/.info-box-->
+  				</div><!--/.col-->
 
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <div class="info-box green-bg" >
+              <i class="fa fa-file-text"></i>
+              <div class="count"><?php echo $jml_ana ?></div>
+              <div class="title">Analisis Pekerjaan</div>            
+            </div><!--/.info-box-->     
+          </div><!--/.col-->
+
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <div class="info-box yellow-bg">
+              <i class="fa fa-users"></i>
+              <div class="count"><?php echo $jml_tenaga ?></div>
+              <div class="title">Tenaga Kerja</div>
+            </div><!--/.info-box-->
+          </div><!--/.col-->
+
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <div class="info-box teal-bg">
+              <i class="fa fa-cubes"></i>
+              <div class="count"><?php echo $jml_bahan ?></div>
+              <div class="title">Bahan Baku</div>
+            </div><!--/.info-box-->
+          </div><!--/.col-->
+
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <div class="info-box linkedin-bg" >
+              <i class="fa fa-cog"></i>
+              <div class="count"><?php echo $jml_kerja ?></div>
+              <div class="title">Pekerjaan</div>            
+            </div><!--/.info-box-->     
+          </div><!--/.col-->
 			</div><!--/.row-->
 
           </section>

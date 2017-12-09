@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
 $no_analisis = $_GET['id'];
 $no_proyek = $_GET['idp'];
 

@@ -1,3 +1,8 @@
+<?php session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+} ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +66,7 @@
                                     PROYEK<br>
                       </header>
                       <section class="panel">
-                            <table class="table table-condensed">
+                            <table class="table table-hover table-striped table-bordered">
                              <tbody>
                                <?php                           
                                   $no_proyek = $_GET['id'];

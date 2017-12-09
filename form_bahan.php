@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
 	require_once('config.php');
 	$db = new mysqli($db_host, $db_username, $db_password, $db_database);
 	if($db->connect_errno){
@@ -87,11 +93,6 @@
 		  <div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-files-o"></i> Form Bahan Baku</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="icon_document_alt"></i>Forms</li>
-						<li><i class="fa fa-files-o"></i>Form Bahan Baku</li>
-					</ol>
 				</div>
 			</div>
               <!-- Form validations -->              

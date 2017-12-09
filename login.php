@@ -1,34 +1,9 @@
 <?php
-    require_once('functions.php');
-    if(!isset($_SESSION['masuk'])){
-        if(isset($_POST['login'])){
-          if((!empty($_POST['email']))&&(!empty($_POST['password']))){
-            $email = mysqli_real_escape_string($con, $_POST['email']);
-            $password = mysqli_real_escape_string($con, $_POST['password']);
-            $password = md5("pas".$password."sap");
-
-            $cekLoginAdmin = mysqli_query($con, "SELECT nama FROM admin WHERE username = '$username' AND password = '$password'");
-
-
-            if(mysqli_num_rows($cekLoginAdmin)!=0){
-              $fetch_user_id = mysqli_fetch_assoc($cekLoginAdmin);
-              $_SESSION['masuk'] = $fetch_user_id['no_admin'];
-              $_SESSION['status'] = "admin";
-              header('Location:./index.php');
-            }else{
-              $gagal = "Tidak dapat login. Silahkan cek username dan password anda kembali";
-            }
-          }else{
-            $gagal = "username dan password harus di isi!";
-            if(!empty($_POST['username'])){
-                $email = mysqli_real_escape_string($con, $_POST['username']);
-            }
-          }
-        }
-    }else{
-        exit;
-        header('Location:./index.php');
-    }
+session_start();
+if (isset($_SESSION['masuk']))
+{
+	 header('Location:./index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +32,7 @@
   <body class="login-img3-body">
 
     <div class="container">
-      <form class="login-form" action="index.php" accept-charset="UTF-8" role="form" method="POST">     
+      <form class="login-form" action="functions.php" accept-charset="UTF-8" role="form" method="POST">     
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i> </br> <font size = "4"> Aplikasi Perhitungan Rencana Biaya PT Beton Budi Mulya</p>
             <?php if(isset($gagal)) echo '<div class="form-group"><span class="label label-warning">'.$gagal.'</span></div>' ?>

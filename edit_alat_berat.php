@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
 $no_alat_berat= $_GET['id'];
 $no_analisis = $_GET['ids'];
 

@@ -1,4 +1,5 @@
 <?php
+
 		$id = $_GET['id'];
 		require_once('config.php');
 		$db = new mysqli($db_host, $db_username, $db_password, $db_database);
@@ -11,7 +12,7 @@
 		$query2 = " SELECT no_analisis FROM analisis_pekerjaan WHERE no_proyek='".$id."'";
 		$array = array();	
 		// $result2 = $db->query( $query2 );
-		while($row2 = mysql_fetch_assoc($query2)){
+		while($row2 = mysqli_fetch_array($query2)){
 		  // add each row returned into an array
 		  $array[] = $row2;
 		}

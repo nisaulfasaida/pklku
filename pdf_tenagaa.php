@@ -1,4 +1,5 @@
 <?php
+
 		require_once('config.php');
 		$con = new mysqli($db_host, $db_username, $db_password, $db_database);
 		if (mysqli_connect_errno()){
@@ -19,7 +20,7 @@
 				$kode_barang = $row['kode_tenaga'];
 				$nama_tenaga = $row['nama_tenaga'];
 				$satuan = $row['satuan'];
-				$harga = $row['harga'];
+				$harga = $row['harga_satuan'];
 				$keterangan = $row['keterangan'];
 			}
 		}
@@ -99,7 +100,7 @@
 							echo '<td>'.$row['kode_tenaga'].'</td> ';
 							echo '<td>'.$row['nama_tenaga'].'</td>';	
 							echo '<td>'.$row['satuan'].'</td>';
-							echo '<td>'.$row['harga'].'</td>';
+							echo '<td align="right">'.number_format($row['harga_satuan'],2,",",".").'</td>';
 							echo '<td>'.$row['keterangan'].'</td>';	
 						echo '</tr>';
 						$no++;

@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+	 header('Location:./login.php');
+}
+
 $kode_barang = $_GET['id'];
 
 $error_kodebarang = '';

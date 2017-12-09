@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+session_start();
+if (!isset($_SESSION['masuk']))
+{
+   header('Location:./login.php');
+}
+
 	require_once('config.php');
 	$db = new mysqli($db_host, $db_username, $db_password, $db_database);
 	if($db->connect_errno){
@@ -46,7 +52,7 @@
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
 	
-    <title>Add Perusahaan Mitra</title>
+    <title>Tambah Perusahaan Mitra</title>
 
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -86,12 +92,7 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-files-o"></i> Form Bahan Baku</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
-						<li><i class="icon_document_alt"></i>Forms</li>
-						<li><i class="fa fa-files-o"></i>Form Tenaga Kerja</li>
-					</ol>
+					<h3 class="page-header"><i class="fa fa-files-o"></i> Form Perusahaan</h3>
 				</div>
 			</div>
               <!-- Form validations -->              
@@ -123,7 +124,7 @@
                                       </div>
 									</div>
 									<div class="form-group">
-                                      <label class="col-sm-2 control-label">cp_perusahaan</label>
+                                      <label class="col-sm-2 control-label">Nomor Telfon</label>
                                       <div class="col-sm-10">
                                           <input name='cp_perusahaan' type="text" class="form-control" required/>
                                       </div>
